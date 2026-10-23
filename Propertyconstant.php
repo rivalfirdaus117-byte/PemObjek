@@ -11,13 +11,26 @@ class Produk{
     //constant pajak = 0,11
     public const PAJAK = 0.11;
 
+    public function __construct(string $kode, string $nama, float $harga, int $stok)
+    {
+        $this->kode = $kode;
+        $this->nama = $nama;
+        $this->harga = $harga;
+        $this->stok = $stok;
+    }
+
+    public function hitungPajak(): float
+    {
+        return $this->harga * self::PAJAK;
+    }
+
 }
     //object
-    $produk = new Produk();
-    $produk->kode = "P001";
-    $produk->nama = "Laptop";
-    $produk->harga = 1000000;
-    $produk->stok = 5;
+    $produk = new Produk("P001", "Laptop", 1000000, 5);
+    //$produk->kode = "P001";
+    //$produk->nama = "Laptop";
+    //$produk->harga = 1000000;
+    //produk->stok = 5;
 
     //hitung total harga dengan pajak
     $pajak = Produk::PAJAK *100; //11

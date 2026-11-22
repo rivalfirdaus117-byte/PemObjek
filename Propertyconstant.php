@@ -1,126 +1,86 @@
 <?php
 
-namespace marketplace
+namespace PemObjek\Marketplace;
 
-class Produk{
+class Produk
+{
+    // Property (Encapsulation: private)
+    private string $kode;
+    private string $nama;
+    private int $harga;
+    private int $stok;
 
-    //property
-    public string $kode; 
-    public string $nama;
-    public int $harga;
-    public int $stok;
-
-    //constant pajak = 0,11
+    // Constant
     public const PAJAK = 0.11;
 
     public function __construct()
     {
-       
+        // Kosong, karena pengisian nilai dilakukan lewat setter (method chaining)
     }
-    
 
-    //setters
-    public function setKode( $kode): void
+    // Setter (mengembalikan $this agar bisa method chaining)
+    public function setKode(string $kode): self
     {
         $this->kode = $kode;
+        return $this;
     }
-    public function setNama( $nama): void
+
+    public function setNama(string $nama): self
     {
         $this->nama = $nama;
+        return $this;
     }
-    public function setHarga( $harga): void
-    {
 
-    if($harga < 0){
-        echo "Harga tidak boleh 0";
-        exit();
+    public function setHarga(int $harga): self
+    {
+        if ($harga <= 0) {
+            echo "Harga tidak boleh 0 atau kurang";
+            exit();
         }
         $this->harga = $harga;
         return $this;
-
     }
 
-    public function setStok( $stok): void
+    public function setStok(int $stok): self
     {
-    
-    if($stok < 0){
-        echo "Stok tidak boleh 0";
-        exit();
+        if ($stok <= 0) {
+            echo "Stok tidak boleh 0 atau kurang";
+            exit();
         }
         $this->stok = $stok;
         return $this;
     }
 
-    public function getPajak(): float
-    {
-        return self::PAJAK;
-    }
-    public function hitungPajak(): float
-    {
-        return $this->harga * self::PAJAK;
-    }
-    public function getTotal(): int
-    {
-        return $this->harga + $this->hitungPajak();
-    }
-
-    //getters
+    // Getter
     public function getKode(): string
     {
         return $this->kode;
     }
+
     public function getNama(): string
     {
         return $this->nama;
     }
+
     public function getHarga(): int
     {
         return $this->harga;
     }
+
     public function getStok(): int
     {
         return $this->stok;
     }
-    public function getPajak(): float
+
+    public function pajak(): float
     {
-        return self::PAJAK;
-    }
-    public function getTotal(): int
-    {
-        return $this->harga + $this->hitungPajak();
+        return self::PAJAK * 100; // 11
     }
 
-
-
-    public function hitungPajak(): float
+    public function total(): float
     {
-        return $this->harga * self::PAJAK;
-    }
-    
-    public function total(){
-        return $this->harga + (this->harga * self::PAJAK);
+        return $this->harga + ($this->harga * self::PAJAK);
     }
 }
 
-    //object
-    $produk = new Produk("P001", "Laptop", 1000000, 5);
-    //$produk->kode = "P001";
-    //$produk->nama = "Laptop";
-    //$produk->harga = 1000000;
-    //produk->stok = 5;
-
-    //hitung total harga dengan pajak
-    $pajak = Produk::PAJAK *100; //11
-    $jumlahPajak = $produk->harga * produk::PAJAK; //11 juta
-
-    //total
-    $total = $produk->harga + $jumlahPajak; //11,1 juta
-
-    //hasil
-    echo "Kode :" , $produk->kode;
-    echo "<br/>Nama :" , $produk->nama;
-    echo "<br/>Harga :" , $produk->harga;
-    echo "<br/>Stok :" , $produk->stok;
-    echo "<br/>Pajak :" , $pajak . "%";
-    echo "<br/>Jumlah Pajak :" , $jumlahPajak;
-    echo "<br/>Total Harga setelah Pajak: Rp." , $total;
+    

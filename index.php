@@ -1,21 +1,22 @@
 <?php
-// panggil file propertyconstant
-require('./propertyconstant.php');
 
-use PemObjek\marketplace\Produk;
-//object
-$produk = new produk();
+// Panggil file PropertyConstant.php (pastikan nama file di folder sama persis)
+require('./PropertyConstant.php');
 
-$produk->setKode("P001");
-$produk->setNama("Laptop");
-$produk->setHarga(1000000);
-$produk->setStok(5);
+use PemObjek\Marketplace\Produk;
 
-//hasil
-echo "Kode :" , $produk->getKode();
-echo "<br/>Nama :" , $produk->getNama();
-echo "<br/>Harga :" , $produk->getHarga();
-echo "<br/>Stok :" , $produk->getStok();
-echo "<br/>Pajak :" , $produk->getPajak() * 100 . "%";
-echo "<br/>Jumlah Pajak :" , $produk->hitungPajak();
-echo "<br/>Total Harga setelah Pajak: Rp." , $produk->getTotal();
+// Membuat object dan mengisi properti melalui setter (method chaining)
+$produk = new Produk();
+
+$produk->setKode('P0001')
+       ->setNama('Laptop')
+       ->setHarga(10000000)
+       ->setStok(5);
+
+// Menampilkan hasil melalui getter & method
+echo "Kode: " . $produk->getKode() . "<br/>";
+echo "Produk: " . $produk->getNama() . "<br/>";
+echo "Harga: Rp. " . $produk->getHarga() . "<br/>";
+echo "Stok: " . $produk->getStok() . "<br/>";
+echo "Pajak: " . $produk->pajak() . "%<br/>";
+echo "Total harga setelah pajak: Rp. " . $produk->total();

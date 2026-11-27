@@ -2,7 +2,7 @@
 
 namespace PemObjek\Marketplace;
 
-class Produk
+trait Produk
 {
     // Property (Encapsulation: private)
     private string $kode;
